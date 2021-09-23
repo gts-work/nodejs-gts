@@ -2,46 +2,34 @@ const express = require("express");
 const router = express.Router();
 require("dotenv").config();
 
-const contactsOperation = require("../../model");
+// const contactsOperation = require("../../model");
+const controlers = require("../../controllers/contactsController");
+const validate = require("../../middlewares/validationMiddleware");
 
-router.get("/", async (req, res, next) => {
-    const contacts = await contactsOperation.listContacts();
-    res.json({ contacts: contacts });
-});
+router.get("/", async (req, res, next) =>
+    controlers.getContactControler(req, res)
+);
 
-router.get("/:contactId", async (req, res, next) => {
-    const contactId = req.params.contactId;
-    const contactItem = await contactsOperation.getContactById(contactId);
-    res.json({ message: contactItem });
-});
+router.get("/:contactId", async (req, res, next) =>
+    controlers.getContactByIdControler(req, res)
+);
 
-router.post("/", async (req, res, next) => {
-    // if (!name || !email || !phone) {
-    //     console.log("Be sure to include name, email and phone".red);
-    //     break;
-    // }
+router.post("/", validate.contactValidation, async (req, res, next) =>
+    controlers.addContactByIdControler(req, res)
+);
 
-    console.log("router.post ~ req.body: ", req.body)
+router.delete("/:contactId", async (req, res, next) =>
+    controlers.deleteContactByIdControler(req, res)
+);
 
-    const newContact = await contactsOperation.addContact(
-        req.body
-    );
-    res.json({ message: "post comtact" });
-});
+router.put("/:contactId", validate.contactValidation, async (req, res, next) =>
+    controlers.patchContactByIdControler(req, res)
+);
 
-router.delete("/:contactId", async (req, res, next) => {
-    const contactId = req.params.contactId;
-    const delContact = await contactsOperation.removeContact(contactId);
-    res.json({ message: "delete comtact" });
-});
-
-router.patch("/:contactId", async (req, res, next) => {
-    const contactId = req.params.contactId;
-    const updateContact = await contactsOperation.updateContact(
-        contactId,
-        req.body
-    );
-    res.json({ message: updateContact });
-});
+router.patch(
+    "/:contactId",
+    validate.updateContactValidation,
+    async (req, res, next) => controlers.patchContactByIdControler(req, res)
+);
 
 module.exports = router;
