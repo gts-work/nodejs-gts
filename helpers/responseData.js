@@ -1,5 +1,5 @@
 const badRequestError = (message) => {
-    const response = { status: "error", message: message[0].message };
+    const response = { status: "error", message: message };
     return response;
 };
 

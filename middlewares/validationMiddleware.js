@@ -17,7 +17,7 @@ module.exports = {
         const validationResult = schema.validate(req.body);
 
         if (validationResult.error) {
-            next(badRequestError(validationResult.error.details));
+            next(badRequestError(validationResult.error.details[0].message));
         }
 
         next();
@@ -38,7 +38,7 @@ module.exports = {
         const validationResult = schema.validate(req.body);
 
         if (validationResult.error) {
-            next(badRequestError(validationResult.error.details));
+            next(badRequestError(validationResult.error.details[0].message));
         }
 
         next();
