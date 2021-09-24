@@ -2,8 +2,7 @@ const express = require("express");
 const router = express.Router();
 require("dotenv").config();
 
-// const contactsOperation = require("../../model");
-const controlers = require("../../controllers/contactsController");
+const controlers = require("../../controllers/contacts");
 const validate = require("../../middlewares/validationMiddleware");
 
 router.get("/", async (req, res, next) =>
