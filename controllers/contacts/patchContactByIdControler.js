@@ -5,7 +5,7 @@ const patchContactByIdControler = async (req, res) => {
     const contactId = Number(req.params.contactId);
 
     if (!contactId) {
-        res.json(
+        return res.json(
             400,
             helpersError.badRequestError("contactId is a required parameter")
         );
@@ -16,7 +16,7 @@ const patchContactByIdControler = async (req, res) => {
         req.body
     );
 
-    res.json(200, { status: "success", message: updateContact });
+    return res.json(200, { status: "success", message: updateContact });
 };
 
 module.exports = patchContactByIdControler;
