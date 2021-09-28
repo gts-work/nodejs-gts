@@ -2,11 +2,10 @@ const contactsOperation = require("../../model/contacts");
 const helpersError = require("../../helpers/responseData");
 
 const patchContactByIdControler = async (req, res) => {
-    const contactId = Number(req.params.contactId);
+    const contactId = req.params.contactId;
 
     if (!contactId) {
-        return res.json(
-            400,
+        return res.sattus9400.json(
             helpersError.badRequestError("contactId is a required parameter")
         );
     }
@@ -16,7 +15,7 @@ const patchContactByIdControler = async (req, res) => {
         req.body
     );
 
-    return res.json(200, { status: "success", message: updateContact });
+    return res.json({ status: "success", message: updateContact });
 };
 
 module.exports = patchContactByIdControler;

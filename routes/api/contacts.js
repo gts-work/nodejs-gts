@@ -22,7 +22,7 @@ router.delete("/:contactId", async (req, res, next) =>
 );
 
 router.put("/:contactId", validate.contactValidation, async (req, res, next) =>
-    controlers.patchContactByIdControler(req, res)
+    controlers.putContactByIdControler(req, res)
 );
 
 router.patch(

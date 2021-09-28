@@ -1,17 +1,13 @@
-const listContacts = require("./listContacts");
 const getContactById = require("./getContactById");
+const Contact = require("./contactsModel");
 
 const putContact = async (contactId, body) => {
-    const contacts = await listContacts();
     const { name, email, phone } = body;
 
-    contacts.forEach((contact) => {
-        if (contact.id === contactId) {
-            contact.name = name;
-            contact.email = email;
-            contact.phone = phone;
-        }
-    });
+    const contact = await Contact.findOneAndUpdate(
+        { _id: contactId },
+        { $set: { name, email, phone } }
+    );
 
     return getContactById(contactId);
 };
