@@ -1,30 +1,7 @@
 const mongoose = require("mongoose");
 
-const { validateEmail, validatePhone } = require("../../services/validator");
-
-// const contactExampleSchema = new mongoose.Schema({
-//     name: {
-//         type: String,
-//         required: true,
-//     },
-//     email: {
-//         type: String,
-//         lowercase: true,
-//         required: "Email address is required",
-//         validate: [validateEmail, "Please fill a valid email address"],
-//         unic: true,
-//     },
-//     phone: {
-//         type: String,
-//         required: "Phone number is required",
-//         validate: [validatePhone, "Please fill a valid phone number"],
-//         unic: true,
-//     },
-//     favorite: {
-//         type: Boolean,
-//         default: false,
-//     },
-// });
+const { validateEmail, validatePhone } = require("../../helpers/validator");
+const { badRequestError } = require("../../helpers/responseData");
 
 const contactSchema = new mongoose.Schema({
     name: {
@@ -46,6 +23,25 @@ const contactSchema = new mongoose.Schema({
         type: Boolean,
         default: false,
     },
+});
+
+// contactSchema.pre("save", function (next) {
+//     // Unless you comment out the `return` above, 'after next' will print
+//     console.log("after next");
+//     next(badRequestError("something went wrong"));
+// });
+
+// contactSchema.pre("save", async function (next) {
+//     await Promise.resolve();
+//     // You can also throw an error in an `async` function
+//     throw new Error("something went wrong");
+//     next();
+// });
+
+contactSchema.pre("save", async function (next) {
+    // this.password = await bcrypt.hash(this.password, 12);
+    // this.passwordConfirm = undefined;
+    next();
 });
 
 const Contact = mongoose.model("Contact", contactSchema);

@@ -1,4 +1,4 @@
-const contactsOperation = require("../../model/contacts");
+const contactsOperation = require("../../services/contacts");
 const helpersError = require("../../helpers/responseData");
 
 const putContactByIdControler = async (req, res) => {

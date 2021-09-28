@@ -1,5 +1,5 @@
 const getContactById = require("./getContactById");
-const Contact = require("./contactsModel");
+const Contact = require("../../model/contacts/contactsModel");
 
 const putContact = async (contactId, body) => {
     const { name, email, phone } = body;
