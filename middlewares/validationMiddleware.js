@@ -12,6 +12,7 @@ module.exports = {
                     // tlds: { allow: ["com", "net"] },
                 })
                 .required(),
+            favorite: Joi.boolean().default(false),
         });
 
         const validationResult = schema.validate(req.body);
@@ -33,6 +34,7 @@ module.exports = {
                     // tlds: { allow: ["com", "net"] },
                 })
                 .optional(),
+            favorite: Joi.boolean().default(false).optional(),
         });
 
         const validationResult = schema.validate(req.body);

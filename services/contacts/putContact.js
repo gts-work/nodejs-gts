@@ -4,7 +4,7 @@ const Contact = require("../../model/contacts/contactsModel");
 const putContact = async (contactId, body) => {
     const { name, email, phone } = body;
 
-    const contact = await Contact.findOneAndUpdate(
+    await Contact.findOneAndUpdate(
         { _id: contactId },
         { $set: { name, email, phone } }
     );

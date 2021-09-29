@@ -1,23 +1,9 @@
-const listContacts = require("./listContacts");
+const Contact = require("../../model/contacts/contactsModel");
 const getContactById = require("./getContactById");
 
 const patchContact = async (contactId, body) => {
-    const contacts = await listContacts();
-    const { name, email, phone } = body;
-
-    contacts.forEach((contact) => {
-        if (contact.id === contactId) {
-            if (name) {
-                contact.name = name;
-            }
-            if (email) {
-                contact.email = email;
-            }
-            if (phone) {
-                contact.phone = phone;
-            }
-        }
-    });
+    const { favorite } = body;
+    await Contact.findOneAndUpdate({ _id: contactId }, { $set: { favorite } });
 
     return getContactById(contactId);
 };
