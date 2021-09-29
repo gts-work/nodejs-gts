@@ -4,31 +4,33 @@ require("dotenv").config();
 
 const controlers = require("../../controllers/contacts");
 const validate = require("../../middlewares/validationMiddleware");
+const { asyncWrapper } = require("../../helpers/validator");
 
-router.get("/", async (req, res, next) =>
-    controlers.getContactControler(req, res)
+router.get("/", asyncWrapper(controlers.getContactControler));
+
+router.get("/:contactId", asyncWrapper(controlers.getContactByIdControler));
+
+router.post(
+    "/",
+    validate.contactValidation,
+    asyncWrapper(controlers.addContactByIdControler)
 );
 
-router.get("/:contactId", async (req, res, next) =>
-    controlers.getContactByIdControler(req, res)
+router.delete(
+    "/:contactId",
+    asyncWrapper(controlers.deleteContactByIdControler)
 );
 
-router.post("/", validate.contactValidation, async (req, res, next) =>
-    controlers.addContactByIdControler(req, res)
-);
-
-router.delete("/:contactId", async (req, res, next) =>
-    controlers.deleteContactByIdControler(req, res)
-);
-
-router.put("/:contactId", validate.contactValidation, async (req, res, next) =>
-    controlers.putContactByIdControler(req, res)
+router.put(
+    "/:contactId",
+    validate.contactValidation,
+    asyncWrapper(controlers.putContactByIdControler)
 );
 
 router.patch(
     "/:contactId",
     validate.updateContactValidation,
-    async (req, res, next) => controlers.patchContactByIdControler(req, res)
+    asyncWrapper(controlers.patchContactByIdControler)
 );
 
 module.exports = router;

@@ -9,7 +9,14 @@ const validatePhone = function (phone) {
     return re.test(phone);
 };
 
+const asyncWrapper = (controller) => {
+    return (req, res, next) => {
+        controller(req, res).catch(next);
+    };
+};
+
 module.exports = {
     validateEmail,
     validatePhone,
+    asyncWrapper,
 };
