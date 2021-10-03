@@ -6,7 +6,7 @@ const controlers = require("../../controllers/contacts");
 const validate = require("../../middlewares/validationMiddleware");
 const { asyncWrapper } = require("../../helpers/validator");
 
-router.get("/", asyncWrapper(controlers.getContactControler));
+router.get("/", asyncWrapper(controlers.getContactsControler));
 
 router.get("/:contactId", asyncWrapper(controlers.getContactByIdControler));
 

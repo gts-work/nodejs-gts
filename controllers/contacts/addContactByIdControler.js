@@ -1,25 +1,19 @@
 const contactsOperation = require("../../services/contacts");
-const helpersError = require("../../helpers/responseData");
+const { WrongParametersError } = require("../../helpers/responseError");
 
 const addContactByIdControler = async (req, res) => {
     const { name, email, phone } = req.body;
 
     if (!name || !email || !phone) {
-        return res
-            .status(400)
-            .json(
-                helpersError.badRequestError(
-                    "name, email, phone is are required parameters"
-                )
-            );
+        throw new WrongParametersError(
+            "name, email, phone is are required parameters"
+        );
     }
 
     const newContact = await contactsOperation.addContact(req.body);
 
     if (!newContact) {
-        return res
-            .status(400)
-            .json(helpersError.badRequestError("Contact not added"));
+        throw new WrongParametersError("Contact not added");
     }
 
     return res.json({ status: "success", message: newContact });

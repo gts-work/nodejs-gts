@@ -22,6 +22,11 @@ const contactSchema = new mongoose.Schema({
         type: Boolean,
         default: false,
     },
+    owner: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: [true, "Set owner for contact"],
+        ref: "user",
+    },
 });
 
 const Contact = mongoose.model("Contact", contactSchema);

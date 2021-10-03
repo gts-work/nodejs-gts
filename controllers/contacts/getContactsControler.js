@@ -1,8 +1,10 @@
 const contactsOperation = require("../../services/contacts");
 
-const getContactControler = async (req, res) => {
+const getContactsControler = async (req, res) => {
+    console.log("getContactsControler ~ getContactsControler");
+
     const contacts = await contactsOperation.listContacts();
     return res.json({ status: "success", message: contacts });
 };
 
-module.exports = getContactControler;
+module.exports = getContactsControler;

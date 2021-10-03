@@ -1,23 +1,18 @@
 const contactsOperation = require("../../services/contacts");
-const helpersError = require("../../helpers/responseData");
+const {
+    WrongParametersError,
+    ValidationError,
+} = require("../../helpers/responseError");
 
 const patchContactByIdControler = async (req, res) => {
     const contactId = req.params.contactId;
 
     if (!contactId) {
-        return res
-            .status(400)
-            .json(
-                helpersError.badRequestError(
-                    "contactId is a required parameter"
-                )
-            );
+        throw new WrongParametersError("contactId is a required parameter");
     }
 
     if (!req.body) {
-        return res
-            .status(400)
-            .json(helpersError.badRequestError("missing field favorite"));
+        throw new WrongParametersError("missing field favorite");
     }
 
     for (const itemsFromBody in req.body) {
@@ -28,18 +23,14 @@ const patchContactByIdControler = async (req, res) => {
             );
 
             if (!updateContact) {
-                return res
-                    .status(404)
-                    .json(helpersError.badRequestError("Not found"));
+                throw new WrongParametersError("not found");
             }
 
             return res.json({ status: "success", message: updateContact });
         }
     }
 
-    return res
-        .status(400)
-        .json(helpersError.badRequestError("missing field favorite"));
+    throw new WrongParametersError("missing field favorite");
 };
 
 module.exports = patchContactByIdControler;
