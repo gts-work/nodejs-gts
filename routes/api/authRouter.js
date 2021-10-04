@@ -3,14 +3,19 @@ const router = express.Router();
 // require("dotenv").config();
 const { asyncWrapper } = require("../../helpers/validator");
 
-const controlers = require("../../controllers/auth");
+const {
+    registrationController,
+    loginController,
+} = require("../../controllers/auth");
 const validate = require("../../middlewares/validationMiddleware");
 
 router.post(
     "/signup",
     validate.authContactValidation,
-    asyncWrapper(controlers.registrationController)
+    asyncWrapper(registrationController)
 );
+
+router.post("/login", asyncWrapper(loginController));
 
 module.exports = router;
 

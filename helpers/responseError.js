@@ -39,4 +39,5 @@ module.exports = {
     WrongParametersError,
     NotAuthorizedError,
     ValidationEmailError,
+    NotAuthorizedError,
 };
