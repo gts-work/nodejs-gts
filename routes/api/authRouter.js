@@ -6,7 +6,11 @@ const { asyncWrapper } = require("../../helpers/validator");
 const controlers = require("../../controllers/auth");
 const validate = require("../../middlewares/validationMiddleware");
 
-router.post("/signup", asyncWrapper(controlers.registrationController));
+router.post(
+    "/signup",
+    validate.authContactValidation,
+    asyncWrapper(controlers.registrationController)
+);
 
 module.exports = router;
 

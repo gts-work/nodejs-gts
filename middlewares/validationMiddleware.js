@@ -1,5 +1,8 @@
 const Joi = require("joi");
-const { ValidationError } = require("../helpers/responseError");
+const {
+    ValidationError,
+    ValidationEmailError,
+} = require("../helpers/responseError");
 
 module.exports = {
     contactValidation: (req, res, next) => {
@@ -18,7 +21,9 @@ module.exports = {
         const validationResult = schema.validate(req.body);
 
         if (validationResult.error) {
-            next(ValidationError(validationResult.error.details[0].message));
+            next(
+                new ValidationError(validationResult.error.details[0].message)
+            );
         }
 
         next();
@@ -40,7 +45,9 @@ module.exports = {
         const validationResult = schema.validate(req.body);
 
         if (validationResult.error) {
-            next(ValidationError(validationResult.error.details[0].message));
+            next(
+                new ValidationError(validationResult.error.details[0].message)
+            );
         }
 
         next();
@@ -56,13 +63,15 @@ module.exports = {
                     // tlds: { allow: ["com", "net"] },
                 })
                 .required(),
-            password: joi.string().min(8).max(255).required(),
+            password: Joi.string().min(8).max(255).required(),
         });
 
         const validationResult = schema.validate(req.body);
 
         if (validationResult.error) {
-            next(ValidationError(validationResult.error.details[0].message));
+            next(
+                new ValidationError(validationResult.error.details[0].message)
+            );
         }
 
         next();

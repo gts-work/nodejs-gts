@@ -26,9 +26,17 @@ class NotAuthorizedError extends GeneralCustomError {
     }
 }
 
+class ValidationEmailError extends GeneralCustomError {
+    constructor(message) {
+        super(message);
+        this.status = 409;
+    }
+}
+
 module.exports = {
     GeneralCustomError,
     ValidationError,
     WrongParametersError,
     NotAuthorizedError,
+    ValidationEmailError,
 };
