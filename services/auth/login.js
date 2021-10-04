@@ -9,7 +9,7 @@ const login = async (email, password) => {
     const user = await User.findOne({ email });
 
     if (!user || !(await bcrypt.compare(password, user.password))) {
-        throw new NotAuthorizedError(`Email or password is wrong`);
+        throw new NotAuthorizedError("Email or password is wrong");
     }
 
     const token = jwt.sign(

@@ -5,6 +5,9 @@ require("dotenv").config();
 const controlers = require("../../controllers/contacts");
 const validate = require("../../middlewares/validationMiddleware");
 const { asyncWrapper } = require("../../helpers/validator");
+const { authMiddleware } = require("../../middlewares/authMiddleware");
+
+router.use(authMiddleware);
 
 router.get("/", asyncWrapper(controlers.getContactsControler));
 

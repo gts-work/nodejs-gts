@@ -6,8 +6,12 @@ const { asyncWrapper } = require("../../helpers/validator");
 const {
     registrationController,
     loginController,
+    currentUserController,
 } = require("../../controllers/auth");
 const validate = require("../../middlewares/validationMiddleware");
+const { authMiddleware } = require("../../middlewares/authMiddleware");
+
+router.use(authMiddleware);
 
 router.post(
     "/signup",
@@ -16,6 +20,8 @@ router.post(
 );
 
 router.post("/login", asyncWrapper(loginController));
+
+router.get("/current", asyncWrapper(currentUserController));
 
 module.exports = router;
 
