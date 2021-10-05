@@ -6,6 +6,7 @@ const {
 
 const patchContactByIdControler = async (req, res) => {
     const contactId = req.params.contactId;
+    const userId = req.user._id;
 
     if (!contactId) {
         throw new WrongParametersError("contactId is a required parameter");
@@ -19,7 +20,8 @@ const patchContactByIdControler = async (req, res) => {
         if (itemsFromBody === "favorite") {
             const updateContact = await contactsOperation.patchContact(
                 contactId,
-                req.body
+                req.body,
+                userId
             );
 
             if (!updateContact) {

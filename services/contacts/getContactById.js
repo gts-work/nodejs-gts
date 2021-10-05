@@ -1,8 +1,8 @@
 const Contact = require("../../model/contacts/contactsModel");
 const { WrongParametersError } = require("../../helpers/responseError");
 
-const getContactById = async (contactId) => {
-    const contact = await Contact.findOne({ _id: contactId });
+const getContactById = async (contactId, owner) => {
+    const contact = await Contact.findOne({ _id: contactId, owner });
 
     if (!contact) {
         throw new WrongParametersError(

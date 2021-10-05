@@ -3,7 +3,8 @@ const { WrongParametersError } = require("../../helpers/responseError");
 
 const deleteContactByIdControler = async (req, res) => {
     const contactId = req.params.contactId;
-    const delContact = await contactsOperation.removeContact(contactId);
+    const userId = req.user._id;
+    const delContact = await contactsOperation.removeContact(contactId, userId);
 
     if (!delContact) {
         throw new WrongParametersError(

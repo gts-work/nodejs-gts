@@ -3,6 +3,7 @@ const { WrongParametersError } = require("../../helpers/responseError");
 
 const addContactByIdControler = async (req, res) => {
     const { name, email, phone } = req.body;
+    const userId = req.user._id;
 
     if (!name || !email || !phone) {
         throw new WrongParametersError(
@@ -10,7 +11,7 @@ const addContactByIdControler = async (req, res) => {
         );
     }
 
-    const newContact = await contactsOperation.addContact(req.body);
+    const newContact = await contactsOperation.addContact(req.body, userId);
 
     if (!newContact) {
         throw new WrongParametersError("Contact not added");

@@ -1,9 +1,9 @@
 const contactsOperation = require("../../services/contacts");
 
 const getContactsControler = async (req, res) => {
-    console.log("getContactsControler ~ getContactsControler");
+    const userId = req.user._id;
 
-    const contacts = await contactsOperation.listContacts();
+    const contacts = await contactsOperation.listContacts(userId);
     return res.json({ status: "success", message: contacts });
 };
 
