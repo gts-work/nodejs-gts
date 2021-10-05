@@ -1,4 +1,4 @@
-const contactsOperation = require("../../services/contacts");
+const { putContact } = require("../../services/contacts");
 const { WrongParametersError } = require("../../helpers/responseError");
 
 const putContactByIdControler = async (req, res) => {
@@ -9,11 +9,7 @@ const putContactByIdControler = async (req, res) => {
         throw new WrongParametersError("contactId is a required parameter");
     }
 
-    const updateContact = await contactsOperation.putContact(
-        contactId,
-        req.body,
-        userId
-    );
+    const updateContact = await putContact(contactId, req.body, userId);
 
     return res.json({ status: "success", message: updateContact });
 };

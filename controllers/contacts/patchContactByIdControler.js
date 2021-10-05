@@ -1,4 +1,4 @@
-const contactsOperation = require("../../services/contacts");
+const { patchContact } = require("../../services/contacts");
 const {
     WrongParametersError,
     ValidationError,
@@ -18,7 +18,7 @@ const patchContactByIdControler = async (req, res) => {
 
     for (const itemsFromBody in req.body) {
         if (itemsFromBody === "favorite") {
-            const updateContact = await contactsOperation.patchContact(
+            const updateContact = await patchContact(
                 contactId,
                 req.body,
                 userId

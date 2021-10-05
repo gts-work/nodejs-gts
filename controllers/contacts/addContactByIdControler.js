@@ -1,4 +1,4 @@
-const contactsOperation = require("../../services/contacts");
+const { addContact } = require("../../services/contacts");
 const { WrongParametersError } = require("../../helpers/responseError");
 
 const addContactByIdControler = async (req, res) => {
@@ -11,7 +11,7 @@ const addContactByIdControler = async (req, res) => {
         );
     }
 
-    const newContact = await contactsOperation.addContact(req.body, userId);
+    const newContact = await addContact(req.body, userId);
 
     if (!newContact) {
         throw new WrongParametersError("Contact not added");

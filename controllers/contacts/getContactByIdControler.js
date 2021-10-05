@@ -1,8 +1,8 @@
-const contactsOperation = require("../../services/contacts");
+const { getContactById } = require("../../services/contacts");
 const { WrongParametersError } = require("../../helpers/responseError");
 
 const getContactByIdControler = async (req, res) => {
-    const contactItem = await contactsOperation.getContactById(
+    const contactItem = await getContactById(
         req.params.contactId,
         req.user._id
     );

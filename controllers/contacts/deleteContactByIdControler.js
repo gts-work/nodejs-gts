@@ -1,10 +1,10 @@
-const contactsOperation = require("../../services/contacts");
+const { removeContact } = require("../../services/contacts");
 const { WrongParametersError } = require("../../helpers/responseError");
 
 const deleteContactByIdControler = async (req, res) => {
     const contactId = req.params.contactId;
     const userId = req.user._id;
-    const delContact = await contactsOperation.removeContact(contactId, userId);
+    const delContact = await removeContact(contactId, userId);
 
     if (!delContact) {
         throw new WrongParametersError(
