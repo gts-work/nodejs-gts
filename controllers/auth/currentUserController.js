@@ -13,6 +13,7 @@ const currentUserController = async (req, res) => {
             },
         });
     } catch (err) {
+        console.log("currentUserController ~ err ==>> ", err);
         throw new NotAuthorizedError(`Not authorized: ${err.message}`);
     }
 };

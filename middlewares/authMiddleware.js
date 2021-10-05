@@ -4,6 +4,11 @@ const { NotAuthorizedError } = require("../helpers/responseError");
 const authMiddleware = (req, res, next) => {
     try {
         // TODO: validate token type later
+        if (req.url === "/signup" || req.url === "/login") {
+            next();
+            return;
+        }
+
         const { authorization } = req.headers;
 
         if (!authorization) {
