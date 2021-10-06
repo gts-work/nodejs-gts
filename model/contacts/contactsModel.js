@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const mongoosePaginate = require("mongoose-paginate-v2");
 
 const { validateEmail, validatePhone } = require("../../helpers/validator");
 
@@ -29,6 +30,7 @@ const contactSchema = new mongoose.Schema({
     },
 });
 
+contactSchema.plugin(mongoosePaginate);
 const Contact = mongoose.model("Contact", contactSchema);
 
 module.exports = Contact;
