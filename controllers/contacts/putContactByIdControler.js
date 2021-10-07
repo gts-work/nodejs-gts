@@ -1,23 +1,15 @@
-const contactsOperation = require("../../services/contacts");
-const helpersError = require("../../helpers/responseData");
+const { putContact } = require("../../services/contacts");
+const { WrongParametersError } = require("../../helpers/responseError");
 
 const putContactByIdControler = async (req, res) => {
     const contactId = req.params.contactId;
+    const userId = req.user._id;
 
     if (!contactId) {
-        return res
-            .status(400)
-            .json(
-                helpersError.badRequestError(
-                    "contactId is a required parameter"
-                )
-            );
+        throw new WrongParametersError("contactId is a required parameter");
     }
 
-    const updateContact = await contactsOperation.putContact(
-        contactId,
-        req.body
-    );
+    const updateContact = await putContact(contactId, req.body, userId);
 
     return res.json({ status: "success", message: updateContact });
 };

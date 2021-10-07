@@ -1,5 +1,8 @@
 const Joi = require("joi");
-const { badRequestError } = require("../helpers/responseData");
+const {
+    ValidationError,
+    ValidationEmailError,
+} = require("../helpers/responseError");
 
 module.exports = {
     contactValidation: (req, res, next) => {
@@ -18,7 +21,9 @@ module.exports = {
         const validationResult = schema.validate(req.body);
 
         if (validationResult.error) {
-            next(badRequestError(validationResult.error.details[0].message));
+            next(
+                new ValidationError(validationResult.error.details[0].message)
+            );
         }
 
         next();
@@ -40,7 +45,33 @@ module.exports = {
         const validationResult = schema.validate(req.body);
 
         if (validationResult.error) {
-            next(badRequestError(validationResult.error.details[0].message));
+            next(
+                new ValidationError(validationResult.error.details[0].message)
+            );
+        }
+
+        next();
+    },
+
+    authContactValidation: (req, res, next) => {
+        const schema = Joi.object({
+            subscription: Joi.string().min(4).max(64).optional(),
+            token: Joi.string().min(9).max(128).optional(),
+            email: Joi.string()
+                .email({
+                    minDomainSegments: 2,
+                    // tlds: { allow: ["com", "net"] },
+                })
+                .required(),
+            password: Joi.string().min(8).max(255).required(),
+        });
+
+        const validationResult = schema.validate(req.body);
+
+        if (validationResult.error) {
+            next(
+                new ValidationError(validationResult.error.details[0].message)
+            );
         }
 
         next();

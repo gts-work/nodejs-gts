@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const mongoosePaginate = require("mongoose-paginate-v2");
 
 const { validateEmail, validatePhone } = require("../../helpers/validator");
 
@@ -22,8 +23,14 @@ const contactSchema = new mongoose.Schema({
         type: Boolean,
         default: false,
     },
+    owner: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: [true, "Set owner for contact"],
+        ref: "user",
+    },
 });
 
+contactSchema.plugin(mongoosePaginate);
 const Contact = mongoose.model("Contact", contactSchema);
 
 module.exports = Contact;

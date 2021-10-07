@@ -1,10 +1,15 @@
 const Contact = require("../../model/contacts/contactsModel");
+const { WrongParametersError } = require("../../helpers/responseError");
 
-const getContactById = async (contactId) => {
-    const contact = await Contact.findOne({ _id: contactId });
+const getContactById = async (contactId, owner) => {
+    const contact = await Contact.findOne({ _id: contactId, owner }).select({
+        __v: 0,
+    });
 
     if (!contact) {
-        return null;
+        throw new WrongParametersError(
+            `Failure, no contact with id '${contactId}' found!`
+        );
     }
 
     return contact;
