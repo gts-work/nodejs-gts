@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const gravatar = require("gravatar");
 
 const { validateEmail, validatePassword } = require("../../helpers/validator");
 
@@ -16,6 +17,7 @@ const userSchema = new mongoose.Schema({
         validate: [validateEmail, "Please fill a valid email address"],
         unique: true,
     },
+    avatarURL: String,
     subscription: {
         type: String,
         enum: ["starter", "pro", "business"],
@@ -39,6 +41,12 @@ userSchema.pre("save", async function () {
         );
 
         this.token = token;
+
+        this.avatarURL = gravatar.url(
+            this.email,
+            { s: "100", r: "x", d: "retro" },
+            true
+        );
     }
 });
 
