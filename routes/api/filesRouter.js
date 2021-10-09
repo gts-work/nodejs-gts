@@ -5,7 +5,7 @@ const multer = require("multer");
 const storage = require("../../helpers/storageData");
 const { asyncWrapper } = require("../../helpers/validator");
 const { uploadController } = require("../../controllers/files");
-const FILE_DIR = require("../../helpers/fileDirPath");
+const { TMP_FILE_DIR } = require("../../helpers/fileDirPath");
 
 const uploadMiddleware = multer({ storage });
 
@@ -14,6 +14,6 @@ router.post(
     uploadMiddleware.single("avatar"),
     asyncWrapper(uploadController)
 );
-router.use("/download", express.static(FILE_DIR));
+router.use("/download", express.static(TMP_FILE_DIR));
 
 module.exports = router;

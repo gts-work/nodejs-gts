@@ -6,7 +6,6 @@ const patchUserControler = async (req, res) => {
     const subscriptionList = ["starter", "pro", "business"];
 
     for (const itemsFromBody in req.body) {
-        console.log("patchUserControler ~ itemsFromBody ==>> ", itemsFromBody);
         if (
             itemsFromBody === "subscription" &&
             subscriptionList.includes(req.body.subscription)

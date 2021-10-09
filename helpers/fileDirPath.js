@@ -1,5 +1,6 @@
 const path = require("path");
 
-const FILE_DIR = path.resolve(`${process.env.STATIC_DIR}/avatars`);
+const TMP_FILE_DIR = path.resolve(`${process.env.STATIC_DIR}/tmp`);
+const AVATAR_FILE_DIR = path.resolve(`${process.env.STATIC_DIR}/avatars`);
 
-module.exports = FILE_DIR;
+module.exports = { TMP_FILE_DIR, AVATAR_FILE_DIR };
