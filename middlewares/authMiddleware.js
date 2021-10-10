@@ -32,7 +32,8 @@ const authMiddleware = (req, res, next) => {
 
         next();
     } catch (err) {
-        next(new NotAuthorizedError(`Not authorized: ${err.message}`));
+        next(new NotAuthorizedError("Not authorized"));
+        // next(new NotAuthorizedError(`Not authorized: ${err.message}`));
     }
 };
 
