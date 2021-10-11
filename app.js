@@ -4,7 +4,9 @@ const cors = require("cors");
 
 const contactsRouter = require("./routes/api/contactsRouter");
 const authRouter = require("./routes/api/authRouter");
+const filesRouter = require("./routes/api/filesRouter");
 const { errorHandler } = require("./helpers/validator");
+const { AVATAR_FILE_DIR } = require("./helpers/fileDirPath");
 
 const app = express();
 
@@ -16,6 +18,8 @@ app.use(express.json());
 
 app.use("/api/contacts", contactsRouter);
 app.use("/api/users", authRouter);
+app.use("/api/files", filesRouter);
+app.use("/avatars", express.static(AVATAR_FILE_DIR));
 app.use(errorHandler);
 
 module.exports = app;

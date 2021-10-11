@@ -1,7 +1,3 @@
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
-const sha256 = require("sha256");
-
 const { User } = require("../../model");
 const { ValidationEmailError } = require("../../helpers/responseError");
 
