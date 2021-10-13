@@ -33,6 +33,13 @@ class ValidationEmailError extends GeneralCustomError {
     }
 }
 
+class ValidationVerificationError extends GeneralCustomError {
+    constructor(message) {
+        super(message);
+        this.status = 404;
+    }
+}
+
 module.exports = {
     GeneralCustomError,
     ValidationError,
@@ -40,4 +47,5 @@ module.exports = {
     NotAuthorizedError,
     ValidationEmailError,
     NotAuthorizedError,
+    ValidationVerificationError,
 };

@@ -12,6 +12,8 @@ const {
     logoutController,
     patchUserControler,
     uploadAvatarController,
+    verificationController,
+    repeatVerificationController,
 } = require("../../controllers/auth");
 const validate = require("../../middlewares/validationMiddleware");
 const { authMiddleware } = require("../../middlewares/authMiddleware");
@@ -33,5 +35,7 @@ router.patch(
     asyncWrapper(uploadAvatarController)
 );
 router.patch("/", asyncWrapper(patchUserControler));
+router.get("/verify/:verificationToken", asyncWrapper(verificationController));
+router.post("/verify", asyncWrapper(repeatVerificationController));
 
 module.exports = router;

@@ -4,6 +4,8 @@ const currentUserController = require("./currentUserController");
 const logoutController = require("./logoutController");
 const patchUserControler = require("./patchUserControler");
 const uploadAvatarController = require("./uploadAvatarController");
+const verificationController = require("./verificationController");
+const repeatVerificationController = require("./repeatVerificationController");
 
 module.exports = {
     registrationController,
@@ -12,4 +14,6 @@ module.exports = {
     logoutController,
     patchUserControler,
     uploadAvatarController,
+    verificationController,
+    repeatVerificationController,
 };
