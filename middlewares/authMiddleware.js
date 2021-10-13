@@ -2,14 +2,14 @@ const jwt = require("jsonwebtoken");
 const { NotAuthorizedError } = require("../helpers/responseError");
 
 const authMiddleware = (req, res, next) => {
-    console.log("authMiddleware ~ req.url ==>> ", req.url);
+    // console.log("authMiddleware ~ req.url ==>> ", req.url);
 
     try {
         // TODO: validate token type later
         if (
             req.url === "/signup" ||
             req.url === "/login" ||
-            req.url.includes("/verify/")
+            req.url.includes("/verify")
         ) {
             next();
             return;

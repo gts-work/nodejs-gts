@@ -5,6 +5,7 @@ const logout = require("./logout");
 const patchUser = require("./patchUser");
 const patchUserAvatar = require("./patchUserAvatar");
 const verificationService = require("./verification");
+const repeatVerificationService = require("./repeatVerification");
 
 module.exports = {
     registration,
@@ -14,4 +15,5 @@ module.exports = {
     patchUser,
     patchUserAvatar,
     verificationService,
+    repeatVerificationService,
 };
