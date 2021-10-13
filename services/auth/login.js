@@ -8,6 +8,10 @@ const { NotAuthorizedError } = require("../../helpers/responseError");
 const login = async (email, password) => {
     const user = await User.findOne({ email });
 
+    if (!user.verify) {
+        throw new NotAuthorizedError("User not verification");
+    }
+
     if (!user || !(await bcrypt.compare(password, user.password))) {
         throw new NotAuthorizedError("Email or password is wrong");
     }

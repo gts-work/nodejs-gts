@@ -1,5 +1,4 @@
 const { getContactById } = require("../../services/contacts");
-const { WrongParametersError } = require("../../helpers/responseError");
 
 const getContactByIdControler = async (req, res) => {
     const contactItem = await getContactById(

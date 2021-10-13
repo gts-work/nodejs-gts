@@ -1,6 +1,8 @@
+const { v4: uuidv4 } = require("uuid");
+
 const { User } = require("../../model");
 const { ValidationEmailError } = require("../../helpers/responseError");
-const { sendEmail } = require("../email");
+const { sendEmail } = require("../emailApi");
 
 const registration = async (email, password) => {
     const checkUser = await User.findOne({ email });
@@ -9,14 +11,16 @@ const registration = async (email, password) => {
         throw new ValidationEmailError("Email in use");
     }
 
+    const verifyToken = uuidv4();
+
     const user = new User({
         email,
         password,
+        verifyToken,
     });
     await user.save();
 
-    const code = "123";
-    const msg = `Please, confirm your email address POST http://localhost:8083/api/auth/registration_confirmation/${code}`;
+    const msg = `Please, confirm your email address: http://localhost:3000/api/users/verify/${verifyToken}`;
     await sendEmail(email, "registration", msg);
 };
 
